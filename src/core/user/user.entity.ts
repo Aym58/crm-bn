@@ -1,21 +1,35 @@
+import * as bcrypt from 'bcrypt';
+
 import {
   BaseEntity,
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToOne,
+  CreateDateColumn,
+  BeforeInsert,
 } from 'typeorm';
 
-import { AuthEntity } from '../auth/auth.entity';
+import { SALT } from './enum/password-salt.enum';
 
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @CreateDateColumn()
+  registeredAt: string;
+
   @Column({ type: 'varchar' })
   name: string;
 
-  @OneToOne(() => AuthEntity, (auth) => auth.user)
-  auth: AuthEntity;
+  @Column({ type: 'varchar', unique: true })
+  email: string;
+
+  @Column({ type: 'varchar' })
+  password: string;
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, SALT.VALUE);
+  }
 }
