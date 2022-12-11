@@ -7,7 +7,9 @@ import {
   Column,
   CreateDateColumn,
   BeforeInsert,
+  OneToMany,
 } from 'typeorm';
+import { LeadEntity } from '../lead/lead.entity';
 
 import { SALT } from './enum/password-salt.enum';
 
@@ -27,6 +29,9 @@ export class UserEntity extends BaseEntity {
 
   @Column({ type: 'varchar' })
   password: string;
+
+  @OneToMany(() => LeadEntity, (lead) => lead.user)
+  leads: LeadEntity[];
 
   @BeforeInsert()
   async hashPassword() {

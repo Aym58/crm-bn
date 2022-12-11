@@ -4,12 +4,13 @@ import { DataSourceOptions } from 'typeorm';
 import { config } from 'dotenv';
 
 import { UserEntity } from 'src/core/user/user.entity';
+import { LeadEntity } from 'src/core/lead/lead.entity';
 
 config();
 
 const configService = new ConfigService();
 
-const Entities = [UserEntity];
+const Entities = [UserEntity, LeadEntity];
 
 export const typeOrmConfig: DataSourceOptions = {
   type: 'postgres',
