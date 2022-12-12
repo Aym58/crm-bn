@@ -26,4 +26,21 @@ export const LeadRepository = dataSource.getRepository(LeadEntity).extend({
       throw new InternalServerErrorException();
     }
   },
+
+  async getAllLeads(): Promise<LeadEntity[]> {
+    const query = this.createQueryBuilder('lead');
+    query.leftJoin('lead.user', 'user');
+    query.addOrderBy('lead.id', 'DESC');
+    query.select([
+      'lead.id',
+      'lead.name',
+      'lead.source',
+      'lead.budget',
+      'lead.task',
+      'lead.contact',
+      'lead.createDate',
+      'user.email',
+    ]);
+    return query.getMany();
+  },
 });

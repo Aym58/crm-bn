@@ -5,6 +5,7 @@ import { UserEntity } from '../user/user.entity';
 import { UserModule } from '../user/user.module';
 import { LeadController } from './lead.controller';
 import { LeadEntity } from './lead.entity';
+import { LeadService } from './lead.service';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { LeadEntity } from './lead.entity';
     AuthModule,
     TypeOrmModule.forFeature([LeadEntity, UserEntity]),
   ],
+  providers: [LeadService],
   controllers: [LeadController],
 })
 export class LeadModule {}

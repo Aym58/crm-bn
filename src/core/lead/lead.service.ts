@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
+
 import { UserEntity } from '../user/user.entity';
+import { AllLeadsDto } from './dto/all-leads.dto';
+
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { LeadDto } from './dto/lead.dto';
 import { LeadRepository } from './lead.repository';
@@ -21,5 +24,10 @@ export class LeadService {
       contact: lead.contact,
       user: lead.user.email,
     };
+  }
+
+  async getAllLeads(): Promise<AllLeadsDto> {
+    const leads = await LeadRepository.getAllLeads();
+    return { leads };
   }
 }
