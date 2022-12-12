@@ -20,7 +20,7 @@ export class LeadService {
       name: lead.name,
       source: lead.source,
       budget: lead.budget,
-      nextTask: lead.task,
+      task: lead.task,
       contact: lead.contact,
       user: lead.user.email,
     };

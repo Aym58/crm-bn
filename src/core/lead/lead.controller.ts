@@ -26,6 +26,7 @@ export class LeadController {
   }
 
   @Get('all')
+  @UseGuards(AuthGuard())
   async getallLeads(): Promise<AllLeadsDto> {
     return this.leadService.getAllLeads();
   }

@@ -9,6 +9,8 @@ import {
 } from 'typeorm';
 
 import { UserEntity } from '../user/user.entity';
+import { Tasks } from './enum/tasks.enum';
+import { Status } from './enum/status.enum';
 
 @Entity({ name: 'lead' })
 export class LeadEntity extends BaseEntity {
@@ -25,7 +27,10 @@ export class LeadEntity extends BaseEntity {
   budget: string;
 
   @Column({ type: 'varchar' })
-  task: string;
+  task: Tasks;
+
+  @Column({ type: 'varchar', default: Status.IN_PROGRESS })
+  taskStatus: Status;
 
   @Column({ type: 'varchar' })
   contact: string;

@@ -1,4 +1,6 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsEnum } from 'class-validator';
+import { Errors } from '../enum/errors.enum';
+import { Tasks } from '../enum/tasks.enum';
 
 export class CreateLeadDto {
   @IsNotEmpty()
@@ -14,8 +16,10 @@ export class CreateLeadDto {
   budget: string;
 
   @IsNotEmpty()
-  @IsString()
-  nextTask: string;
+  @IsEnum(Tasks, {
+    message: Errors.INVALID_TASK_NAME,
+  })
+  task: Tasks;
 
   @IsNotEmpty()
   @IsString()

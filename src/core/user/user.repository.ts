@@ -15,7 +15,6 @@ import { UserEntity } from './user.entity';
 export const UserRepository = dataSource.getRepository(UserEntity).extend({
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     const { name, email, password } = createUserDto;
-
     const inDatabase = await this.findOne({
       where: { email },
     });

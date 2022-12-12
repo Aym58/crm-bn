@@ -1,5 +1,3 @@
-import * as bcrypt from 'bcrypt';
-
 import {
   BaseEntity,
   Entity,
@@ -9,8 +7,10 @@ import {
   BeforeInsert,
   OneToMany,
 } from 'typeorm';
-import { LeadEntity } from '../lead/lead.entity';
+import * as bcrypt from 'bcrypt';
 
+import { LeadEntity } from '../lead/lead.entity';
+import { ScriptEntity } from '../script/script.entity';
 import { SALT } from './enum/password-salt.enum';
 
 @Entity({ name: 'user' })
@@ -32,6 +32,9 @@ export class UserEntity extends BaseEntity {
 
   @OneToMany(() => LeadEntity, (lead) => lead.user)
   leads: LeadEntity[];
+
+  @OneToMany(() => ScriptEntity, (script) => script.user)
+  scripts: ScriptEntity[];
 
   @BeforeInsert()
   async hashPassword() {

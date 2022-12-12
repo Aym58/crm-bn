@@ -10,13 +10,12 @@ export const LeadRepository = dataSource.getRepository(LeadEntity).extend({
     createLeadDto: CreateLeadDto,
     user: UserEntity,
   ): Promise<LeadEntity> {
-    const { name, source, budget, nextTask, contact } = createLeadDto;
-
+    const { name, source, budget, task, contact } = createLeadDto;
     const lead = new LeadEntity();
     lead.name = name;
     lead.source = source;
     lead.budget = budget;
-    lead.task = nextTask;
+    lead.task = task;
     lead.contact = contact;
     lead.user = user;
     try {
