@@ -11,6 +11,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login.dto';
 import { UserDto } from './dto/user.dto';
 import { UserEntity } from './user.entity';
+import { ERROR } from './enum/error.enum';
 
 export const UserRepository = dataSource.getRepository(UserEntity).extend({
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
@@ -19,7 +20,7 @@ export const UserRepository = dataSource.getRepository(UserEntity).extend({
       where: { email },
     });
     if (inDatabase) {
-      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+      throw new HttpException(ERROR.ALREADY_EXISTS, HttpStatus.BAD_REQUEST);
     }
 
     const user = new UserEntity();
@@ -44,11 +45,17 @@ export const UserRepository = dataSource.getRepository(UserEntity).extend({
   async findUser({ email, password }: LoginUserDto): Promise<UserDto> {
     const user = await this.findOne({ where: { email } });
     if (!user) {
-      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        ERROR.INVALID_CREDENTIALS,
+        HttpStatus.UNAUTHORIZED,
+      );
     }
     const verify = await bcrypt.compare(password, user.password);
     if (!verify) {
-      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        ERROR.INVALID_CREDENTIALS,
+        HttpStatus.UNAUTHORIZED,
+      );
     }
     return user;
   },

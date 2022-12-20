@@ -11,8 +11,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../user/decorator/getUser.decorator';
 import { UserEntity } from '../user/user.entity';
 import { CreateScriptDto } from './dto/create-script.dto';
-import { ScriptDto } from './dto/script.dto';
-import { UserScriptsDto } from './dto/user-scripts.dto';
+import { ResponseDto } from './dto/response.dto';
+
 import { ScriptService } from './script.service';
 
 @Controller('script')
@@ -24,13 +24,13 @@ export class ScriptController {
   async createScript(
     @Body(ValidationPipe) createScriptDto: CreateScriptDto,
     @GetUser() user: UserEntity,
-  ): Promise<ScriptDto> {
+  ): Promise<ResponseDto> {
     return await this.scriptService.CreateScript(createScriptDto, user);
   }
 
   @Get('all')
   @UseGuards(AuthGuard())
-  async getallLeads(@GetUser() user: UserEntity): Promise<UserScriptsDto> {
+  async getallLeads(@GetUser() user: UserEntity): Promise<ResponseDto> {
     return this.scriptService.getUserScripts(user);
   }
 }

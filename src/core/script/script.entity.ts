@@ -9,6 +9,8 @@ import {
 
 import { UserEntity } from '../user/user.entity';
 
+import { SourceValuesType } from './constant/source-values';
+
 @Entity({ name: 'script' })
 export class ScriptEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -18,7 +20,7 @@ export class ScriptEntity extends BaseEntity {
   name: string;
 
   @Column({ type: 'varchar' })
-  source: string;
+  source: SourceValuesType;
 
   @Column({ type: 'varchar' })
   link: string;

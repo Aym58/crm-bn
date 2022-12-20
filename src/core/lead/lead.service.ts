@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-
+import { HttpStatus } from '@nestjs/common/enums';
 import { UserEntity } from '../user/user.entity';
 import { AllLeadsDto } from './dto/all-leads.dto';
-
 import { CreateLeadDto } from './dto/create-lead.dto';
-import { LeadDto } from './dto/lead.dto';
+
+import { ResponseDto } from './dto/response.dto';
+import { ResponseMessage } from './enum/response.enum';
 import { LeadRepository } from './lead.repository';
 
 @Injectable()
@@ -12,18 +13,18 @@ export class LeadService {
   async CreateLead(
     createLeadDto: CreateLeadDto,
     user: UserEntity,
-  ): Promise<LeadDto> {
-    const lead = await LeadRepository.createLead(createLeadDto, user);
-
-    return {
-      id: lead.id,
-      name: lead.name,
-      source: lead.source,
-      budget: lead.budget,
-      task: lead.task,
-      contact: lead.contact,
-      user: lead.user.email,
+  ): Promise<ResponseDto> {
+    const response: ResponseDto = {
+      statusCode: HttpStatus.CREATED,
+      message: ResponseMessage.CREATE_SUCCESS,
     };
+    try {
+      await LeadRepository.createLead(createLeadDto, user);
+    } catch (error) {
+      response.statusCode = error.status;
+      response.message = error.response;
+    }
+    return response;
   }
 
   async getAllLeads(): Promise<AllLeadsDto> {

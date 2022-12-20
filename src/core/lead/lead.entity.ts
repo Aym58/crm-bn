@@ -10,7 +10,7 @@ import {
 
 import { UserEntity } from '../user/user.entity';
 import { Tasks } from './enum/tasks.enum';
-import { Status } from './enum/status.enum';
+import { LeadStatus } from './enum/lead-status.enum';
 
 @Entity({ name: 'lead' })
 export class LeadEntity extends BaseEntity {
@@ -29,8 +29,8 @@ export class LeadEntity extends BaseEntity {
   @Column({ type: 'varchar' })
   task: Tasks;
 
-  @Column({ type: 'varchar', default: Status.IN_PROGRESS })
-  taskStatus: Status;
+  @Column({ type: 'varchar', default: LeadStatus.IN_PROGRESS })
+  taskStatus: LeadStatus;
 
   @Column({ type: 'varchar' })
   contact: string;
