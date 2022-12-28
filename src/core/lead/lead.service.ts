@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpStatus } from '@nestjs/common/enums';
-import { TaskDto } from '../task/dto/tasks.dto';
 
+import { TaskDto } from '../task/dto/tasks.dto';
 import { UserEntity } from '../user/user.entity';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { ResponseDtoCreate, ResponseDtoList } from './dto/response.dto';

@@ -8,7 +8,6 @@ import {
 } from 'typeorm';
 
 import { UserEntity } from '../user/user.entity';
-
 import { SourceValuesType } from './constant/source-values';
 
 @Entity({ name: 'script' })
