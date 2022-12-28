@@ -7,7 +7,7 @@ async function bootstrap() {
   const port = process.env.PORT;
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: ['https://crm-fn.vercel.app/', 'https://crm-bn.vercel.app'],
+    origin: true,
     credentials: true,
   });
   await app.listen(port);
