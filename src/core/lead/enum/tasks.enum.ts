@@ -1,4 +1,4 @@
-export enum Tasks {
+export enum TasksEnum {
   BID = 'bid',
   INVITE = 'invite',
   CALL = 'call',

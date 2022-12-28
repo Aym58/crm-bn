@@ -1,6 +1,7 @@
 import { InternalServerErrorException } from '@nestjs/common';
 
 import { dataSource } from 'src/database/typeorm/typeorm.datasource';
+import { TaskDto } from '../task/dto/tasks.dto';
 import { UserEntity } from '../user/user.entity';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { LeadEntity } from './lead.entity';
@@ -36,10 +37,31 @@ export const LeadRepository = dataSource.getRepository(LeadEntity).extend({
       'lead.source',
       'lead.budget',
       'lead.task',
+      'lead.taskUpdateDate',
       'lead.contact',
-      'lead.createDate',
+      'lead.status',
       'user.email',
+      'user.name',
     ]);
     return query.getMany();
+  },
+
+  async updateLeadTask(lead: LeadEntity, updateTaskDto: TaskDto) {
+    const { task, status } = updateTaskDto;
+    const today = new Date();
+    if (task && task !== lead.task) {
+      lead.task = task;
+      lead.taskUpdateDate = today.toISOString();
+    }
+    if (status && status !== lead.status) {
+      lead.status = status;
+      lead.taskUpdateDate = today.toISOString();
+    }
+    try {
+      await lead.save();
+      return lead;
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
   },
 });

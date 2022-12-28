@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 import { UserEntity } from '../user/user.entity';
-import { Tasks } from './enum/tasks.enum';
+import { TasksEnum } from './enum/tasks.enum';
 import { LeadStatus } from './enum/lead-status.enum';
 
 @Entity({ name: 'lead' })
@@ -27,13 +27,16 @@ export class LeadEntity extends BaseEntity {
   budget: string;
 
   @Column({ type: 'varchar' })
-  task: Tasks;
-
-  @Column({ type: 'varchar', default: LeadStatus.IN_PROGRESS })
-  taskStatus: LeadStatus;
+  contact: string;
 
   @Column({ type: 'varchar' })
-  contact: string;
+  task: TasksEnum;
+
+  @Column({ type: 'varchar', default: LeadStatus.IN_PROGRESS })
+  status: LeadStatus;
+
+  @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  taskUpdateDate: string;
 
   @CreateDateColumn()
   createDate: string;

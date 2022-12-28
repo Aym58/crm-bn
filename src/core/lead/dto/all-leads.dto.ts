@@ -1,15 +1,14 @@
-import { Tasks } from '../enum/tasks.enum';
+import { LeadStatus } from '../enum/lead-status.enum';
+import { TasksEnum } from '../enum/tasks.enum';
 
-interface LeadDto {
+export interface LeadsDto {
   id: number;
   name: string;
   source: string;
   budget: string;
-  task: Tasks;
+  task: TasksEnum;
+  taskUpdateDate: string;
+  status: LeadStatus;
   contact: string;
-  user: { email: string };
-}
-
-export interface AllLeadsDto {
-  leads: LeadDto[];
+  user: { email: string; name: string };
 }

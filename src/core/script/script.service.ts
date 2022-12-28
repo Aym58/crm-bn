@@ -27,7 +27,7 @@ export class ScriptService {
 
   async getUserScripts(user: UserEntity): Promise<ResponseDto> {
     const response: ResponseDto = {
-      statusCode: HttpStatus.CREATED,
+      statusCode: HttpStatus.OK,
       message: ResponseMessage.SUCCESS,
     };
     try {
