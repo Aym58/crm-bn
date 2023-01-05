@@ -14,25 +14,25 @@ export class TaskController {
   constructor(private readonly taskService: TaskService) {}
   @Get('list')
   @UseGuards(AuthGuard())
-  async GetTaskList(): Promise<ResponseDto> {
+  async getTaskList(): Promise<ResponseDto> {
     return this.taskService.getTaskList();
   }
 
   @Get('failure-rate')
   @UseGuards(AuthGuard())
-  async GetTaskFailureRate(): Promise<ResponseDto> {
+  async getTaskFailureRate(): Promise<ResponseDto> {
     return this.taskService.getTaskFailureRate();
   }
 
   @Get(':leadId')
   @UseGuards(AuthGuard(), LeadGuard)
-  async GetTask(@GetLead() lead: LeadEntity): Promise<ResponseDto> {
+  async getTask(@GetLead() lead: LeadEntity): Promise<ResponseDto> {
     return this.taskService.getLeadTask(lead);
   }
 
   @Patch(':leadId')
   @UseGuards(AuthGuard(), LeadGuard)
-  async GetPostList(
+  async getPostList(
     @GetLead() lead: LeadEntity,
     @Body(ValidationPipe) updateTaskDto: TaskDto,
   ): Promise<ResponseDto> {

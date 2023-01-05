@@ -8,7 +8,7 @@ import { ResponseMessage } from './enum/response.enum';
 
 @Injectable()
 export class ScriptService {
-  async CreateScript(
+  async createScript(
     createScriptDto: CreateScriptDto,
     user: UserEntity,
   ): Promise<ResponseDto> {

@@ -11,7 +11,7 @@ import { LeadRepository } from './lead.repository';
 
 @Injectable()
 export class LeadService {
-  async CreateLead(
+  async createLead(
     createLeadDto: CreateLeadDto,
     user: UserEntity,
   ): Promise<ResponseDtoCreate> {

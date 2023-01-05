@@ -20,7 +20,7 @@ export class LeadController {
     @Body(ValidationPipe) createLeadDto: CreateLeadDto,
     @GetUser() user: UserEntity,
   ): Promise<ResponseDtoCreate> {
-    return await this.leadService.CreateLead(createLeadDto, user);
+    return await this.leadService.createLead(createLeadDto, user);
   }
 
   @Get('all')

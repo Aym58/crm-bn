@@ -24,7 +24,7 @@ export class ScriptController {
     @Body(ValidationPipe) createScriptDto: CreateScriptDto,
     @GetUser() user: UserEntity,
   ): Promise<ResponseDto> {
-    return await this.scriptService.CreateScript(createScriptDto, user);
+    return await this.scriptService.createScript(createScriptDto, user);
   }
 
   @Get('all')
