@@ -32,7 +32,7 @@ export class AuthService {
 
   async login(loginUserDto: LoginUserDto): Promise<ResponseDto> {
     const response: ResponseDto = {
-      statusCode: HttpStatus.CREATED,
+      statusCode: HttpStatus.OK,
       message: ResponseMessage.LOGIN_SUCCESS,
     };
     try {

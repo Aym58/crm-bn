@@ -1,4 +1,5 @@
 import { HttpStatus } from '@nestjs/common';
+import { TaskFailureRate } from 'src/core/task/dto/task-list.dto';
 import { LeadsDto } from './all-leads.dto';
 import { LeadDto } from './lead.dto';
 
@@ -17,4 +18,10 @@ export interface ResponseDtoList {
 export interface ResponseDtoCreate {
   statusCode: HttpStatus;
   message: string;
+}
+
+export interface ResponseDtoFailureRate {
+  statusCode: HttpStatus;
+  message: string;
+  data?: TaskFailureRate[];
 }

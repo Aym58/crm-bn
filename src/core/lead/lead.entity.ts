@@ -35,8 +35,8 @@ export class LeadEntity extends BaseEntity {
   @Column({ type: 'varchar', default: LeadStatus.IN_PROGRESS })
   status: LeadStatus;
 
-  @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-  taskUpdateDate: string;
+  @Column({ type: 'bigint' })
+  taskUpdateTime: number;
 
   @CreateDateColumn()
   createDate: string;

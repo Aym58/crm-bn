@@ -7,7 +7,7 @@ export interface LeadDto {
   source: string;
   budget: string;
   task: TasksEnum;
-  taskUpdateDate: string;
+  taskUpdateTime: number;
   status: LeadStatus;
   contact: string;
   user: string;

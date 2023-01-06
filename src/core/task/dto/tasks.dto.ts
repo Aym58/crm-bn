@@ -7,7 +7,7 @@ export interface LeadDto {
   source: string;
   budget: string;
   task: TasksEnum;
-  taskUpdateDate: Date;
+  taskUpdateTime: Date;
   status: LeadStatus;
   contact: string;
   user: string;
@@ -17,5 +17,5 @@ export interface TaskDto {
   id: number;
   task: TasksEnum;
   status: LeadStatus;
-  taskUpdateDate?: Date;
+  taskUpdateTime?: Date;
 }

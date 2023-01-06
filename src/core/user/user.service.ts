@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { JwtPayload } from '../auth/dto/jwt.dto';
 
 import { AllUsersDto } from './dto/all-users.dto';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -33,7 +34,7 @@ export class UserService {
     };
   }
 
-  async findByPayload({ email }: any): Promise<UserDto> {
+  async findByPayload({ email }: JwtPayload): Promise<UserDto> {
     const user = await UserRepository.findOne({ where: { email } });
     return {
       id: user.id,
