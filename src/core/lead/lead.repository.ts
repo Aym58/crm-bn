@@ -85,17 +85,19 @@ export const LeadRepository = dataSource.getRepository(LeadEntity).extend({
     const rateArr: TaskFailureRate[] = [];
 
     try {
-      const allFails = await this.createQueryBuilder('lead')
+      const list = await this.createQueryBuilder('lead')
         .where('lead.status = :status', { status: LeadStatus.FAIL })
-        .getCount();
+        .select(['lead.id', 'lead.name', 'lead.task'])
+        .getMany();
+
       for (const task of TasksArray) {
-        const failsByTask = await this.createQueryBuilder('lead')
-          .where('lead.status = :status', { status: LeadStatus.FAIL })
-          .where('lead.task = :task', { task: task })
-          .getCount();
         rateArr.push({
           task,
-          failureRate: Math.round((failsByTask / allFails) * 100),
+          failureRate: Math.round(
+            ([...list].filter((lead) => lead.task === task).length /
+              [...list].length) *
+              100,
+          ),
         });
       }
 
