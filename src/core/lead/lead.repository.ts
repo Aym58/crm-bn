@@ -21,7 +21,7 @@ export const LeadRepository = dataSource.getRepository(LeadEntity).extend({
     lead.budget = budget;
     lead.task = task;
     lead.contact = contact;
-    lead.taskUpdateTime = Number(Date.now());
+    lead.taskUpdateTime = Date.now();
     lead.user = user;
 
     try {
